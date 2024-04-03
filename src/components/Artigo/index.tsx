@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+
 import {
   Card,
   CardHeader,
@@ -9,6 +10,8 @@ import {
   CardFooter,
 } from "../ui/card";
 import { Input } from "../ui/input";
+import { useNavigate, useOutlet } from "react-router";
+
 
 
 interface ArticleProps {
@@ -19,6 +22,10 @@ interface ArticleProps {
 const Artigos = () => {
   const [artigos, setArtigos] = useState<ArticleProps[]>([]);
   const [search, setSearch] = useState ('');
+  const navigate = useNavigate();
+  const outlet = useOutlet();
+
+
   console.log('renderizou');
 
   const truncateText = (text: string, maxLength: number) => {
@@ -36,6 +43,16 @@ const Artigos = () => {
     }
   };
   
+  const handleArticleClick = (id: number) => {
+    
+    navigate(`/artigos/${id}`);
+
+    
+    if (outlet) {
+return <div>{outlet} </div>
+    }
+  };
+
 
   const filteredArticles = search.length > 0 
   ? artigos.filter(artigo=> artigo.titulo.includes(search))
@@ -58,7 +75,7 @@ const Artigos = () => {
   <div className="flex justify-center flex-col items-center"> 
     {filteredArticles.map(artigo => {
       return (
-<div key={artigo.id} className="">
+<div key={artigo.id} className="" onClick={() => handleArticleClick(artigo.id)}>
 <Card key={artigo.id} className="md:w-96 h-96  mt-14 cursor-pointer sm: max-h-96 w-80 ">
           <CardHeader>
             <CardTitle>{artigo.titulo}</CardTitle>
@@ -70,7 +87,7 @@ const Artigos = () => {
             <p>{truncateText(artigo.conteudo, 290)}</p>
           </CardContent>
           <CardFooter className="mb-8">
-            <p>Texto retirado da internet</p>
+            <p>Clique no card para ver mais</p>
           </CardFooter>
         </Card>
 
@@ -84,7 +101,7 @@ const Artigos = () => {
     
     <div className=" justify-end items-end mt-14 grid md:grid-cols-2 gap-10 grid-cols-1">
       {artigos.map((artigo) => (
-        <Card key={artigo.id} className=" md:w-96 h-96 h-max-auto max-w-xs cursor-pointer">
+        <Card key={artigo.id} className=" md:w-96 h-96 h-max-auto max-w-xs cursor-pointer " onClick={() => handleArticleClick(artigo.id)}>
           <CardHeader>
             <CardTitle>{ artigo.titulo}</CardTitle>
 
@@ -95,7 +112,7 @@ const Artigos = () => {
             <p>{truncateText(artigo.conteudo, 260)}</p>
           </CardContent>
           <CardFooter className="">
-            <p>Texto retirado da internet</p>
+            <p>Clique no card para ver mais</p>
           </CardFooter>
         </Card>
       ))}
