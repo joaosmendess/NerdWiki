@@ -55,22 +55,22 @@ const Artigos = () => {
      
      />
 {search.length > 0 ? (
-  <div > 
+  <div className="flex justify-center flex-col items-center"> 
     {filteredArticles.map(artigo => {
       return (
-<div key={artigo.id}>
-<Card key={artigo.id} className=" md:w-96 h-96 h-max-auto  mt-14 sm:  h-max-auto  w-80">
+<div key={artigo.id} className="">
+<Card key={artigo.id} className="md:w-96 h-96  mt-14 cursor-pointer sm: max-h-96 w-80 ">
           <CardHeader>
             <CardTitle>{artigo.titulo}</CardTitle>
-
-            <CardDescription> </CardDescription>
+ 
+          
           </CardHeader>
 
           <CardContent>
-            <p>{artigo.conteudo}</p>
+            <p>{truncateText(artigo.conteudo, 290)}</p>
           </CardContent>
-          <CardFooter>
-            <p>Card Footer</p>
+          <CardFooter className="mb-8">
+            <p>Texto retirado da internet</p>
           </CardFooter>
         </Card>
 
@@ -84,7 +84,7 @@ const Artigos = () => {
     
     <div className=" justify-end items-end mt-14 grid md:grid-cols-2 gap-10 grid-cols-1">
       {artigos.map((artigo) => (
-        <Card key={artigo.id} className=" md:w-96 h-96 h-max-auto w-80">
+        <Card key={artigo.id} className=" md:w-96 h-96 h-max-auto max-w-xs cursor-pointer">
           <CardHeader>
             <CardTitle>{ artigo.titulo}</CardTitle>
 
@@ -92,10 +92,10 @@ const Artigos = () => {
           </CardHeader>
 
           <CardContent>
-            <p>{truncateText(artigo.conteudo, 300)}</p>
+            <p>{truncateText(artigo.conteudo, 260)}</p>
           </CardContent>
-          <CardFooter>
-            <p>Card Footer</p>
+          <CardFooter className="">
+            <p>Texto retirado da internet</p>
           </CardFooter>
         </Card>
       ))}
