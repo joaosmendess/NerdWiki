@@ -11,6 +11,7 @@ import {
 } from "../ui/card";
 import { Input } from "../ui/input";
 import { useNavigate, useOutlet } from "react-router";
+import FooterComponent from "../Footer";
 
 
 
@@ -63,7 +64,7 @@ return <div>{outlet} </div>
   }, []);
 
   return (
-    <main className="flex justify-center  flex-col  items-center sm:p-6 mt-5">
+    <main className="flex justify-center  flex-col  items-center sm:p-0 mt-5">
       <h1 className='mb-5'>Hello NerdWiki!</h1>
      <Input className="md:w-96 w-60 sm: h-11" placeholder="Digite aqui o artigo que você procura"
      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
@@ -72,11 +73,12 @@ return <div>{outlet} </div>
      
      />
 {search.length > 0 ? (
-  <div className="flex justify-center flex-col items-center"> 
+  <div className="flex justify-center flex-col gap-8 items-center mt-8 mb-5"> 
     {filteredArticles.map(artigo => {
       return (
-<div key={artigo.id} className="" onClick={() => handleArticleClick(artigo.id)}>
-<Card key={artigo.id} className="md:w-96 h-96  mt-14 cursor-pointer sm: max-h-96 w-80 ">
+<div key={artigo.id} className="flex justify-center fle-col items-center">
+
+<Card key={artigo.id} className="md:w-96 h-96  cursor-pointer sm: max-h-96 w-80   ">
           <CardHeader>
             <CardTitle>{artigo.titulo}</CardTitle>
  
@@ -94,12 +96,18 @@ return <div>{outlet} </div>
 </div>
       )
     })}
+   
+
+
+
+   
   </div>
+  
 ) : (
 
 
     
-    <div className=" justify-end items-end mt-14 grid md:grid-cols-2 gap-10 grid-cols-1">
+    <div className=" justify-end items-end mt-14 grid md:grid-cols-2 gap-10 grid-cols-1 mb-6">
       {artigos.map((artigo) => (
         <Card key={artigo.id} className=" md:w-96 h-96 h-max-auto max-w-xs cursor-pointer " onClick={() => handleArticleClick(artigo.id)}>
           <CardHeader>
@@ -118,6 +126,7 @@ return <div>{outlet} </div>
       ))}
     </div>
     )}
+    <FooterComponent />
     </main>
     
   );
