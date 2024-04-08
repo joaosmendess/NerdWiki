@@ -5,9 +5,9 @@ const Home = () => {
     <main className=" ">
       <Artigos />
 
-      <div>
-        <h1>footer</h1>
-      </div>
+   
+      
+     
     </main>
   );
 };
